@@ -1,0 +1,7 @@
+name: Votesystem
+version: 1.0
+authors: [SpexMC-Entwicklerteam]
+
+main: de.spexmc.mc.votesystem.Votesystem
+commands:
+  vote:
