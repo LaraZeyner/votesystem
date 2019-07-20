@@ -7,5 +7,7 @@ import java.io.File;
  */
 public final class Const {
   public static final File SQL_CONFIG = new File("plugins" + File.separator + "config" + File.separator + "sql.properties");
+
   public static final String PLAYERTABLE = "Playerstatus";
+  public static final String VOTE_URL = "http://www.spexmc.de/";
 }

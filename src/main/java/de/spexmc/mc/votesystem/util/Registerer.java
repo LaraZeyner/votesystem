@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 import de.spexmc.mc.votesystem.Votesystem;
 import de.spexmc.mc.votesystem.commands.Vote;
-import de.spexmc.mc.votesystem.listener.TestEvent;
+import de.spexmc.mc.votesystem.listener.VoteListener;
 import de.spexmc.mc.votesystem.storage.Data;
 import de.spexmc.mc.votesystem.storage.Messages;
 import org.bukkit.Bukkit;
@@ -45,7 +45,7 @@ public final class Registerer {
 
   private static void registerEvents() {
     // Insert Events here
-    final List<Listener> listeners = Collections.singletonList((Listener) new TestEvent());
+    final List<Listener> listeners = Collections.singletonList((Listener) new VoteListener());
     for (Listener listener : listeners) {
       Bukkit.getPluginManager().registerEvents(listener, Votesystem.getInstance());
     }

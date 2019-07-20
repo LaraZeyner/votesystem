@@ -16,5 +16,6 @@ public final class Messages {
   // General
   public static final String PREFIX = "Votesystem | ";
   public static final String ALREADY_VOTED_TODAY = "Du hast bereits gevotet.";
+  public static final String VOTE_LINK = "Hier kannst du für uns voten.";
 }
 

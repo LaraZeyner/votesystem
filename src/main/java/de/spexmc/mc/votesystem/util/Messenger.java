@@ -36,8 +36,16 @@ public final class Messenger {
     Bukkit.getPlayer(uuid).sendMessage(Messages.PREFIX + msg);
   }
 
+  public static void sendMessage(UUID uuid, String message, String url) {
+    final String commandLine = "/tellraw " + Bukkit.getPlayer(uuid).getName() + " {text:\"" + message +
+        "\",clickEvent:{action:open_url,value:\"" + url + "\"}}";
+    Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), commandLine);
+  }
+
   public static void broadcast(String msg) {
     Bukkit.broadcastMessage(Messages.PREFIX + msg);
   }
+
+
 
 }

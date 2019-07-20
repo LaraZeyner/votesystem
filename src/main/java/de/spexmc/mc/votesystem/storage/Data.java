@@ -1,10 +1,13 @@
 package de.spexmc.mc.votesystem.storage;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import de.spexmc.mc.votesystem.io.sql.SQLManager;
+import de.spexmc.mc.votesystem.objects.Voter;
 
 /**
  * Created by Lara on 26.02.2019 for votesystem
@@ -25,11 +28,13 @@ public final class Data {
     return instance;
   }
 
+  private final List<Voter> voters;
   private final Map<UUID, String> cache;
   private final SQLManager sql;
 
   private Data() {
     this.cache = new HashMap<>();
+    this.voters = new ArrayList<>();
     this.sql = new SQLManager();
   }
 
@@ -40,6 +45,10 @@ public final class Data {
 
   public SQLManager getSql() {
     return sql;
+  }
+
+  public List<Voter> getVoters() {
+    return voters;
   }
   //</editor-fold>
 }
