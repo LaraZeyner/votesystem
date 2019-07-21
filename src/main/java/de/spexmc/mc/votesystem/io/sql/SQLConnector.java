@@ -45,8 +45,15 @@ public class SQLConnector {
 
   void init(Connection connection) {
     if (connection != null) {
-      try (final PreparedStatement stmt = connection.prepareStatement("CREATE TABLE IF NOT EXISTS Votesystem" +
-          "(Spalte1 VARCHAR(8))")) {
+      try (final PreparedStatement stmt = connection.prepareStatement(
+          "CREATE TABLE IF NOT EXISTS voter(" +
+              "uuid     VARCHAR(40) NOT NULL, " +
+              "amount   INT         NOT NULL, " +
+              "streak   INT         NOT NULL, " +
+              "lastVote TIMESTAMP   NULL," +
+              "PRIMARY KEY (uuid), " +
+              "UNIQUE (uuid) " +
+              ");")) {
         stmt.executeUpdate();
 
       } catch (SQLException ex) {

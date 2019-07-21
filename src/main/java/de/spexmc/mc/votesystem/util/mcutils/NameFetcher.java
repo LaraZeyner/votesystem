@@ -46,7 +46,8 @@ final class NameFetcher {
    * @return The name of the given player
    */
   static String getName(UUID uuid) {
-    final String url = "https://api.mojang.com/user/profiles/" + uuid.toString().replace("-", "") + "/names";
+    final String url = "https://api.mojang.com/user/profiles/" + uuid.toString()
+        .replace("-", "") + "/names";
     try {
       final String nameJson = callURL(url);
       final JSONArray nameValue = (JSONArray) JSONValue.parseWithException(nameJson);
@@ -81,7 +82,8 @@ final class NameFetcher {
 
   private static void readURL(StringBuilder builder, URLConnection connection) throws IOException {
     if (connection != null && connection.getInputStream() != null) {
-      try (final InputStreamReader streamReader = new InputStreamReader(connection.getInputStream(), Charset.defaultCharset());
+      try (final InputStreamReader streamReader =
+               new InputStreamReader(connection.getInputStream(), Charset.defaultCharset());
            final BufferedReader bufferedReader = new BufferedReader(streamReader)) {
         int cp;
         while ((cp = bufferedReader.read()) != -1) {

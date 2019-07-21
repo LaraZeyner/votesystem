@@ -1,9 +1,14 @@
 package de.spexmc.mc.votesystem.io.sql;
 
+import java.util.List;
+
+import de.spexmc.mc.votesystem.objects.Voter;
+import de.spexmc.mc.votesystem.storage.Data;
+
 /**
  * Created by Lara on 13.01.2019 for votesystem
  */
-public class SQLManager extends PlayerStorageSQLHandler {
+public class SQLManager extends VoterStorageSQLHandler {
 
   public SQLManager() {
     init(connect());
@@ -16,9 +21,12 @@ public class SQLManager extends PlayerStorageSQLHandler {
   }
 
   public void updateOnStart() {
+    final List<Voter> voters = Data.getInstance().getVoters();
+    voters.addAll(getVoters());
   }
 
   private void updateOnStop() {
-
+    final List<Voter> voters = Data.getInstance().getVoters();
+    voters.forEach(this::setVoter);
   }
 }

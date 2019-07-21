@@ -5,6 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import de.spexmc.mc.votesystem.storage.Messages;
+import de.spexmc.mc.votesystem.util.mcutils.UUIDUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -33,11 +34,11 @@ public final class Messenger {
   }
 
   public static void sendMessage(UUID uuid, String msg) {
-    Bukkit.getPlayer(uuid).sendMessage(Messages.PREFIX + msg);
+    UUIDUtils.getPlayer(uuid).sendMessage(Messages.PREFIX + msg);
   }
 
   public static void sendMessage(UUID uuid, String message, String url) {
-    final String commandLine = "/tellraw " + Bukkit.getPlayer(uuid).getName() + " {text:\"" + message +
+    final String commandLine = "/tellraw " + UUIDUtils.getPlayer(uuid).getName() + " {text:\"" + message +
         "\",clickEvent:{action:open_url,value:\"" + url + "\"}}";
     Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), commandLine);
   }

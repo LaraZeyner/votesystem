@@ -1,7 +1,11 @@
 package de.spexmc.mc.votesystem.listener;
 
+import java.util.UUID;
+
 import com.vexsoftware.votifier.model.Vote;
 import com.vexsoftware.votifier.model.VotifierEvent;
+import de.spexmc.mc.votesystem.objects.Voter;
+import de.spexmc.mc.votesystem.util.mcutils.UUIDUtils;
 import de.spexmc.mc.votesystem.util.objectmanager.VoteManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -26,6 +30,11 @@ public class VoteListener implements Listener {
   @EventHandler
   public void onVote(VotifierEvent votifierEvent) {
     final Vote vote = votifierEvent.getVote();
-    final String voter = vote.getUsername();
+    final String voterName = vote.getUsername();
+    final UUID voterUuid = UUIDUtils.getUUID(voterName);
+    final Voter voter = VoteManager.determineVoter(voterUuid);
+    if (voter.canVote()) {
+      voter.vote();
+    }
   }
 }

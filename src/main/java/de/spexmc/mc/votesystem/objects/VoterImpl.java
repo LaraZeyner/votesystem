@@ -14,10 +14,10 @@ public class VoterImpl implements Serializable {
    * Primary-Key
    */
   private final UUID uuid;
+  private int amount, streak;
   private Date lastVote;
-  private short amount, streak;
 
-  public VoterImpl(UUID uuid, short amount, short streak, Date lastVote) {
+  VoterImpl(UUID uuid, int amount, int streak, Date lastVote) {
     this.uuid = uuid;
     this.amount = amount;
     this.streak = streak;
@@ -25,11 +25,11 @@ public class VoterImpl implements Serializable {
   }
 
   //<editor-fold desc="getter and setter">
-  public short getAmount() {
+  public int getAmount() {
     return amount;
   }
 
-  public void setAmount(short amount) {
+  public void setAmount(int amount) {
     this.amount = amount;
   }
 
@@ -41,11 +41,11 @@ public class VoterImpl implements Serializable {
     this.lastVote = lastVote;
   }
 
-  public short getStreak() {
+  public int getStreak() {
     return streak;
   }
 
-  public void setStreak(short streak) {
+  public void setStreak(int streak) {
     this.streak = streak;
   }
 
