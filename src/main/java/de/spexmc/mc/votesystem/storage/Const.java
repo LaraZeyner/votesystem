@@ -8,7 +8,7 @@ import de.spexmc.mc.votesystem.io.FileManager;
  * Created by Lara on 26.02.2019 for votesystem
  */
 public final class Const {
-  public static final File RSA_DIRECTORY = new File(FileManager.getDataFolder() + File.separator + "rsa");
+  public static final File KEY_FILE = new File(FileManager.getDataFolder() + File.separator + "public.key");
   public static final File SQL_CONFIG = new File(FileManager.getDataFolder() + File.separator +
       "sql.properties");
 

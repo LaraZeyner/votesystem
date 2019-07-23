@@ -7,6 +7,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 
 import de.spexmc.mc.votesystem.Votesystem;
+import de.spexmc.mc.votesystem.io.FileManager;
 import de.spexmc.mc.votesystem.io.IOUtils;
 import de.spexmc.mc.votesystem.storage.Const;
 import de.spexmc.mc.votesystem.storage.Messages;
@@ -22,7 +23,7 @@ public class Votifier {
   private VoteReceiver voteReceiver;
 
   public Votifier() {
-    if (Objects.requireNonNull(Const.RSA_DIRECTORY.list()).length == 0) {
+    if (!Const.KEY_FILE.exists()) {
       Messenger.administratorMessage("First time initialization...");
       Messenger.administratorMessage(
           "First time initialization...\n--------------------------------------------------------\n " +
@@ -30,7 +31,7 @@ public class Votifier {
               "a different port.\n--------------------------------------------------------");
       try {
         this.keyPair = IOUtils.generate(2048);
-        IOUtils.save(Const.RSA_DIRECTORY, keyPair);
+        IOUtils.save(FileManager.getDataFolder(), keyPair);
       } catch (IOException | NoSuchAlgorithmException | InvalidAlgorithmParameterException ex) {
         Messenger.administratorMessage(Messages.CONFIG_ERROR, ex);
         Votesystem.getInstance().onDisable();
