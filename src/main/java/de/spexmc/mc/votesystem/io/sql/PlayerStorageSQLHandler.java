@@ -8,19 +8,17 @@ import java.util.Map;
 import java.util.UUID;
 
 import de.spexmc.mc.votesystem.storage.Const;
-import de.spexmc.mc.votesystem.storage.Data;
 import de.spexmc.mc.votesystem.util.Messenger;
 
 /**
  * Created by Lara on 20.07.2019 for votesystem
  */
-public class PlayerStorageSQLHandler extends SQLConnector {
-
-  public Map<UUID, String> getPlayers() {
-    final SQLManager sqlManager = Data.getInstance().getSql();
+class PlayerStorageSQLHandler extends SQLConnector {
+  Map<UUID, String> getPlayers() {
     final Map<UUID, String> players = new HashMap<>();
-    try (final PreparedStatement statement = sqlManager.getSqlData().getConnection()
-        .prepareStatement("SELECT UUID, name FROM " + Const.PLAYERTABLE);
+    try (final PreparedStatement statement = getConnection()
+        .prepareStatement(
+            "SELECT UUID, name FROM " + Const.PLAYERTABLE);
          final ResultSet resultSet = statement.executeQuery()) {
       while (resultSet.next()) {
         final String uuid = resultSet.getString(1);

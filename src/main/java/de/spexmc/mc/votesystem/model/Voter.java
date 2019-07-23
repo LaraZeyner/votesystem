@@ -1,4 +1,4 @@
-package de.spexmc.mc.votesystem.objects;
+package de.spexmc.mc.votesystem.model;
 
 import java.util.Date;
 import java.util.UUID;
@@ -16,17 +16,17 @@ import org.bukkit.entity.Player;
  * Created by Lara on 20.07.2019 for votesystem
  */
 public class Voter extends VoterImpl {
-  private static final long serialVersionUID = 7131460093302339809L;
+  private static final long serialVersionUID = -6533871774213874781L;
 
   public Voter(UUID uuid) {
-    this(uuid, 0, 0, new Date());
+    this(uuid, 0, 0, new Date(1_550_000_000_000L));
   }
 
   public Voter(UUID uuid, int amount, int streak, Date date) {
     super(uuid, amount, streak, date);
   }
 
-  public void vote() {
+  public void vote(PlayerVote playerVote) {
     setAmount(getAmount() + 1);
     setStreak(checkStreak() ? getStreak() + 1 : 1);
     setLastVote(new Date());
@@ -37,6 +37,9 @@ public class Voter extends VoterImpl {
         "-er Streak).");
     final int coins = VoteManager.determineCoins(getAmount());
     Messenger.sendMessage(getPlayer(), "Du hast " + coins + " Coins erhalten.");
+
+    Messenger.broadcast("Der Spieler §b" + playerVote.getUsername() + "§7 hat auf §b" +
+        playerVote.getServiceName() + "§7 gevotet.");
     //TODO (Abgie) 21.07.2019: Belohnungen vergeben
   }
 
@@ -47,7 +50,7 @@ public class Voter extends VoterImpl {
     }
   }
 
-  public boolean canVote() {
+  private boolean canVote() {
     return !checkVotedToday();
   }
 
@@ -67,7 +70,7 @@ public class Voter extends VoterImpl {
     return dayOfToday - dayOfVote < 2;
   }
 
-  public Player getPlayer() {
+  private Player getPlayer() {
     return UUIDUtils.getPlayer(getUuid());
   }
 }

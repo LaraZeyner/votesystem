@@ -25,6 +25,7 @@ public class SQLConnector {
   SQLConnector() throws NumberFormatException {
     final Map<String, String> sqlConfig = FileManager.loadConfig(Const.SQL_CONFIG);
     final short port = Short.parseShort(Objects.requireNonNull(sqlConfig).get("port"));
+
     final String hostname = sqlConfig.get("host");
     final String username = sqlConfig.get("username");
     final String password = sqlConfig.get("password");
@@ -87,10 +88,6 @@ public class SQLConnector {
 
   public Connection getConnection() {
     return connection;
-  }
-
-  SQLData getSqlData() {
-    return sqlData;
   }
 
   private Logger getLogger() {

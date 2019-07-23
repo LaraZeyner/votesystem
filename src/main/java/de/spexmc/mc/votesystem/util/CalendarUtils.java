@@ -6,8 +6,7 @@ import java.util.Date;
 /**
  * Created by Lara on 20.07.2019 for votesystem
  */
-public class CalendarUtils {
-
+public final class CalendarUtils {
   public static short getDayOfDate(Date date) {
     final Calendar calendar = Calendar.getInstance();
     calendar.setTime(date);

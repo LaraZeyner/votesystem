@@ -25,7 +25,7 @@ public class Votesystem extends JavaPlugin {
     logger.log(Level.INFO, Messages.ENABLING);
     instance = this;
     final Data data = Data.getInstance();
-    data.getCache().putAll(data.getSql().getPlayers());
+    data.getSql().updateOnStart();
 
     Registerer.performRegistration();
     logger.log(Level.INFO, Messages.SUCCESSFULLY_ENABLED);

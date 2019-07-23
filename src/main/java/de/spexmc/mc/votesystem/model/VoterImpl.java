@@ -1,4 +1,4 @@
-package de.spexmc.mc.votesystem.objects;
+package de.spexmc.mc.votesystem.model;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -9,7 +9,7 @@ import java.util.UUID;
  * Created by Lara on 20.07.2019 for votesystem
  */
 public class VoterImpl implements Serializable {
-  private static final long serialVersionUID = -5374138726813928477L;
+  private static final long serialVersionUID = -4621495706037160747L;
   /**
    * Primary-Key
    */
@@ -29,7 +29,7 @@ public class VoterImpl implements Serializable {
     return amount;
   }
 
-  public void setAmount(int amount) {
+  void setAmount(int amount) {
     this.amount = amount;
   }
 
@@ -37,7 +37,7 @@ public class VoterImpl implements Serializable {
     return lastVote;
   }
 
-  public void setLastVote(Date lastVote) {
+  void setLastVote(Date lastVote) {
     this.lastVote = lastVote;
   }
 
@@ -45,7 +45,7 @@ public class VoterImpl implements Serializable {
     return streak;
   }
 
-  public void setStreak(int streak) {
+  void setStreak(int streak) {
     this.streak = streak;
   }
 
@@ -54,28 +54,23 @@ public class VoterImpl implements Serializable {
   }
   //</editor-fold>
 
-
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof VoterImpl)) return false;
     final VoterImpl voter = (VoterImpl) o;
-    return amount == voter.amount &&
-        streak == voter.streak &&
-        uuid.equals(voter.uuid);
+    return amount == voter.amount && streak == voter.streak &&
+        uuid.equals(voter.uuid) && lastVote.equals(voter.lastVote);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(uuid, amount, streak);
+    return Objects.hash(uuid, amount, streak, lastVote);
   }
 
   @Override
   public String toString() {
-    return "Voter{" +
-        "uuid=" + uuid +
-        ", amount=" + amount +
-        ", streak=" + streak +
-        '}';
+    return "VoterImpl{" + "uuid=" + uuid + ", amount=" + amount +
+        ", streak=" + streak + ", lastVote=" + lastVote + '}';
   }
 }

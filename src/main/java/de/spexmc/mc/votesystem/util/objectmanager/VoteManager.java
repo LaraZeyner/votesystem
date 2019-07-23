@@ -1,8 +1,9 @@
 package de.spexmc.mc.votesystem.util.objectmanager;
 
+import java.util.List;
 import java.util.UUID;
 
-import de.spexmc.mc.votesystem.objects.Voter;
+import de.spexmc.mc.votesystem.model.Voter;
 import de.spexmc.mc.votesystem.storage.Data;
 import org.bukkit.entity.Player;
 
@@ -12,12 +13,13 @@ import org.bukkit.entity.Player;
 public final class VoteManager {
 
   public static Voter determineVoter(UUID voterUuid) {
-    Voter voter = Data.getInstance().getVoters().stream().filter(v -> v.getUuid().equals(voterUuid))
+    final List<Voter> voters = Data.getInstance().getVoters();
+    Voter voter = voters.stream().filter(v -> v.getUuid().equals(voterUuid))
         .findFirst().orElse(null);
 
     if (voter == null) {
       voter = new Voter(voterUuid);
-      Data.getInstance().getVoters().add(voter);
+      voters.add(voter);
       Data.getInstance().getSql().addVoter(voter);
     }
 
@@ -35,4 +37,5 @@ public final class VoteManager {
     }
     return coins;
   }
+
 }

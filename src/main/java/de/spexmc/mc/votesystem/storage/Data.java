@@ -7,7 +7,8 @@ import java.util.Map;
 import java.util.UUID;
 
 import de.spexmc.mc.votesystem.io.sql.SQLManager;
-import de.spexmc.mc.votesystem.objects.Voter;
+import de.spexmc.mc.votesystem.model.Voter;
+import de.spexmc.mc.votesystem.util.mcutils.Votifier;
 
 /**
  * Created by Lara on 26.02.2019 for votesystem
@@ -23,7 +24,6 @@ public final class Data {
   public static Data getInstance() {
     if (instance == null) {
       instance = new Data();
-      instance.getSql().updateOnStart();
     }
     return instance;
   }
@@ -31,11 +31,13 @@ public final class Data {
   private final List<Voter> voters;
   private final Map<UUID, String> cache;
   private final SQLManager sql;
+  private final Votifier votifier;
 
   private Data() {
     this.cache = new HashMap<>();
     this.voters = new ArrayList<>();
     this.sql = new SQLManager();
+    this.votifier = new Votifier();
   }
 
   //<editor-fold desc="getter and setter">
@@ -50,5 +52,10 @@ public final class Data {
   public List<Voter> getVoters() {
     return voters;
   }
+
+  public Votifier getVotifier() {
+    return votifier;
+  }
+
   //</editor-fold>
 }

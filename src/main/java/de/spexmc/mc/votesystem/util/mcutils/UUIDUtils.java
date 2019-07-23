@@ -48,26 +48,6 @@ public final class UUIDUtils {
   }
 
   /**
-   * Bestimme den Namen, mithilfe der UUID, mit dem sich der Spieler des
-   * gesuchten Namen zuletzt verbunden hat.
-   *
-   * @param uuid Universally Unique Identifier des Spielers
-   * @return letzter bekannter Name des Spielers
-   */
-  public static String getName(UUID uuid) {
-    final Player player = Bukkit.getPlayer(uuid);
-    if (player != null) {
-      return player.getName();
-    }
-    if (cache != null) {
-      if (cache.containsKey(uuid)) {
-        return cache.get(uuid);
-      }
-    }
-    return NameFetcher.getName(uuid);
-  }
-
-  /**
    * Bestimme den Spieler, mithilfe der UUID, mit dem sich der gesuchte Spieler
    * zuletzt verbunden hat.
    *
@@ -81,17 +61,6 @@ public final class UUIDUtils {
       player = offlinePlayer.getPlayer();
     }
     return player;
-  }
-
-  /**
-   * Bestimme den Spieler, mithilfe der UUID, mit dem sich der gesuchte Spieler
-   * zuletzt verbunden hat.
-   *
-   * @param playerName letzer bekannter Name des Spielers
-   * @return org.bukkit.entity.Player des Spielers
-   */
-  public static Player getPlayer(String playerName) {
-    return getPlayer(getUUID(playerName));
   }
 
 }

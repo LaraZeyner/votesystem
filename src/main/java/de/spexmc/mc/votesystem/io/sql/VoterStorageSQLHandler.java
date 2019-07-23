@@ -1,6 +1,5 @@
 package de.spexmc.mc.votesystem.io.sql;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,20 +9,17 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import de.spexmc.mc.votesystem.objects.Voter;
-import de.spexmc.mc.votesystem.storage.Data;
+import de.spexmc.mc.votesystem.model.Voter;
 import de.spexmc.mc.votesystem.util.Messenger;
 
 /**
  * Created by Lara on 21.07.2019 for votesystem
  */
 public class VoterStorageSQLHandler extends PlayerStorageSQLHandler {
-  private final SQLManager sqlManager = Data.getInstance().getSql();
-  private final Connection connection = sqlManager.getSqlData().getConnection();
-
-  public List<Voter> getVoters() {
+  List<Voter> getVoters() {
     final List<Voter> voters = new ArrayList<>();
-    try (final PreparedStatement stmt = connection.prepareStatement("SELECT * FROM voter");
+    try (final PreparedStatement stmt = getConnection().prepareStatement(
+        "SELECT * FROM voter");
          final ResultSet resultSet = stmt.executeQuery()) {
 
       while (resultSet.next()) {
@@ -42,7 +38,7 @@ public class VoterStorageSQLHandler extends PlayerStorageSQLHandler {
   }
 
   public void addVoter(Voter voter) {
-    try (final PreparedStatement stmt = connection.prepareStatement(
+    try (final PreparedStatement stmt = getConnection().prepareStatement(
         "INSERT INTO voter (uuid, amount, streak, lastVote) " +
             "VALUES (?, ?, ?, ?)")) {
 
@@ -58,12 +54,12 @@ public class VoterStorageSQLHandler extends PlayerStorageSQLHandler {
   }
 
   public void setVoter(Voter voter) {
-    try (final PreparedStatement stmt = connection.prepareStatement(
+    try (final PreparedStatement stmt = getConnection().prepareStatement(
         "UPDATE voter " +
             "SET  amount = ?," +
             "     streak = ?," +
             "     lastVote = ?" +
-            "WHERE uuid = " + voter.getUuid())) {
+            "WHERE uuid = '" + voter.getUuid() + "'")) {
 
       stmt.setInt(1, voter.getAmount());
       stmt.setInt(2, voter.getStreak());
